@@ -1,8 +1,9 @@
 from PRNG import *
+#For checking the stochasticity of the PRNGs
 
 
 def time_sampling(N):
-    """Samples pseudo-random seeds of up to 1e6."""
+    """Samples pseudo-random seeds of up to 1e6 based on time."""
     x = []
     for i in range(N):
         num = int((re.sub(r'\.(0*)', '', str(t.time())))[-6::])
@@ -12,13 +13,16 @@ def time_sampling(N):
         x.append(num)
         t.sleep(1e-10)
     return x
+
+
+
 N = 100
 def plotter(N, f):
     """Plots the data wrt time sampled seed of number N and function f."""
     x = time_sampling(N)
     plt.scatter([i for i in range(N)], [f(a) for a in x])
     plt.show()
-# plotter(N, middle_square)
+plotter(N, middle_square)
 
 def birthday_spacings(data):
     """checks the distance between the points. May fit it to an exponential."""
@@ -29,5 +33,5 @@ def birthday_spacings(data):
     dists = sorted(dists)[::-1]
     plt.scatter([i for i in range(len(dists))], dists)
     plt.show()
-birthday_spacings(lehmer_gen(time_sampling(N)))    
+# birthday_spacings(lehmer_gen(time_sampling(N)))    
 # birthday_spacings(middle_square(time_sampling(N)))    
