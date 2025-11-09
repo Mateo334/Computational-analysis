@@ -29,7 +29,7 @@ def middle_square(number_of_values, *order_of_value):
 def iterative_gens(number_of_values, which_gen = 0, *order_of_value):
     """Returns a list of random integers using the iterative generators. Has multiple modes."""
     ar = []
-    gens = ["LCG",  "blum_blum_shub","Lehmer"]
+    gens = ["LCG",  "blum_blum_shub","Lehmer", "LFG"]
     iters = 50
     if(which_gen==0):
         m, a, c = 2**32, 214013, 2531011  
@@ -43,7 +43,12 @@ def iterative_gens(number_of_values, which_gen = 0, *order_of_value):
         a = 7**5
         m = 2**31-1 
         gen_func = lambda seed: a*seed%m
-
+    # elif(which_gen ==3):
+    #     a = 7
+    #     b = 10
+    #     m = 2**16
+    #     lfg_nums = [1,1,2,3,5,8,13,21,34,55,89]
+    #     gen_func = lambda seed, j: lfg_nums[]
         
     for i in range(number_of_values):
         seed = seed_gen()
